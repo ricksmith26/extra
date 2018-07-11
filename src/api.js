@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Articles from './component/articles';
 
 const URL = 'https://northcodernewsapp.herokuapp.com/api';
 
@@ -14,5 +15,12 @@ export const fetchUsers = async query => {
 
 export const fetchTopics = async query => {
   const res = await axios.get(`${URL}/topics`);
+  return res.data.topics;
+};
+
+export const fetchArticleByTopic = async topic_name => {
+  const res = await axios.get(
+    `${URL}/topics/${this.state.topic_name}/articles`
+  );
   return res.data.topics;
 };
