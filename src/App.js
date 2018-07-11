@@ -8,14 +8,15 @@ class App extends Component {
     articles: [],
     users: []
   };
-  componentDidMount = async () => {
+  async componentDidMount() {
     const articles = await api.fetchArticles();
     const users = await api.fetchUsers();
 
     this.setState({ articles, users });
-  };
+  }
+
   render() {
-    console.log(this.state.articles, '<<<<<<');
+    // console.log(this.state.articles, '<<<<<<');
     return (
       <div className="App">
         <header className="App-header">
@@ -23,7 +24,7 @@ class App extends Component {
         </header>
         <p className="App-intro">Bringing the lasted news to Northcoders</p>
 
-        <Articles {...this.state.articles} />
+        <Articles articles={this.state.articles} />
       </div>
     );
   }

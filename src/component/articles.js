@@ -6,35 +6,25 @@ class Articles extends Component {
     topic_id: ''
   };
   render() {
+    console.log(this.props);
     return (
-      <ul>
-        {articles.map(function(article) {
-          return (
-            <li className="articleList">
-              {article.title}
-              {article.body}
-            </li>
-          );
-        })}
-      </ul>
+      <div className="articlesDiv">
+        <ul>
+          {this.props.articles.map(function(article) {
+            return (
+              <li>
+                <br />
+                <b>{article.title}</b>
+                <br />
+                <br />
+                {article.body}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     );
   }
-  // listArticles = ({ articles }) => {
-  //   return articles.map(function(article) {
-  //     return (
-  //       <div>
-  //         <h3>{article.title}</h3>
-  //         <p>{article.body}</p>
-  //       </div>
-  //     );
-  //   });
-  // };
-}
-{
-  /* <div>
-  <h3>{article.title}</h3>
-  <p>{article.body}</p>
-</div> */
 }
 
 export default Articles;
