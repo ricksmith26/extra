@@ -7,21 +7,34 @@ class Articles extends Component {
   };
   render() {
     return (
-      <div className="articlesDiv">
-        <ListArticles {...this.ListArticles} />
-      </div>
+      <ul>
+        {articles.map(function(article) {
+          return (
+            <li className="articleList">
+              {article.title}
+              {article.body}
+            </li>
+          );
+        })}
+      </ul>
     );
   }
-  ListArticles = ({ articles }) => {
-    return articles.map(function(article) {
-      return (
-        <div>
-          <h3>{article.title}</h3>
-          <p>{article.body}</p>
-        </div>
-      );
-    });
-  };
+  // listArticles = ({ articles }) => {
+  //   return articles.map(function(article) {
+  //     return (
+  //       <div>
+  //         <h3>{article.title}</h3>
+  //         <p>{article.body}</p>
+  //       </div>
+  //     );
+  //   });
+  // };
+}
+{
+  /* <div>
+  <h3>{article.title}</h3>
+  <p>{article.body}</p>
+</div> */
 }
 
 export default Articles;
