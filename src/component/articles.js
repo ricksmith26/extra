@@ -8,12 +8,12 @@ class Articles extends Component {
     topicArticles: []
   };
 
-  async componentDidMount() {
-    const articleByT = await api.fetchArticleByTopic(this.state.topic_name);
-    this.setState({ TopicArticles: articleByT });
-  }
+  // async componentDidMount() {
+  //   const articleByT = await api.fetchArticleByTopic(this.state.topic_name);
+  //   this.setState({ TopicArticles: articleByT });
+  // }
   render() {
-    // console.log(this.props);
+    console.log(this.state.topic_name, '<<<<<<<<<');
 
     return (
       <div className="articlesDiv">
@@ -22,6 +22,15 @@ class Articles extends Component {
             return <option value={topic.title}>{topic.title}</option>;
           })}
         </select>
+        {/* ---------------------------------------------------------------
+          PUT THE BELOW LIST INTO A SEPARATE FUNCTION ON ANOTHER PAGE 
+          THEN, ALSO TO DO THE SAME FOR FIND ARTICLES BY TOPICS     
+          <Route
+          exact
+          path="/topics/"
+          render={() => <StudentAdder addStudent={this.addStudent} />}
+        />
+ --------------------------------------------------------------------        */}
         <ul>
           {this.props.articles.map(function(article) {
             return (
@@ -44,7 +53,6 @@ class Articles extends Component {
   }
 
   handleTopicChange = event => {
-    console.log('hit listener');
     this.setState({ topic_name: event.target.value });
   };
 }

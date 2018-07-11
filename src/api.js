@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Articles from './component/articles';
+// import Articles from './component/articles';
 
 const URL = 'https://northcodernewsapp.herokuapp.com/api';
 
@@ -19,8 +19,6 @@ export const fetchTopics = async query => {
 };
 
 export const fetchArticleByTopic = async topic_name => {
-  const res = await axios.get(
-    `${URL}/topics/${this.state.topic_name}/articles`
-  );
+  const res = await axios.get(`${URL}/topics/coding/articles`);
   return res.data.topics;
 };

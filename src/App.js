@@ -6,7 +6,8 @@ import Articles from './component/articles';
 class App extends Component {
   state = {
     articles: [],
-    users: []
+    users: [],
+    topics: []
   };
   async componentDidMount() {
     const articles = await api.fetchArticles();
