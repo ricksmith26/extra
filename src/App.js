@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import * as api from './api';
-import Articles from './component/articles';
+import Articles from './component/articles/articles';
+import { NavLink } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -20,6 +21,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Nav />
         <header className="App-header">
           <h1 className="App-title">Northcoder News</h1>
         </header>
@@ -31,4 +33,24 @@ class App extends Component {
   }
 }
 
+function Nav() {
+  const activeStyle = {
+    background: 'red'
+  };
+  return (
+    <div>
+      <NavLink exact to="/" activeStyle={activeStyle}>
+        Home
+      </NavLink>
+      {` | `}
+      <NavLink exact to="/articlesByTopic" activeStyle={activeStyle}>
+        search by topic
+      </NavLink>
+      {/* {` | `}
+      <NavLink exact to="/addStudent" activeStyle={activeStyle}>
+        Add Student
+      </NavLink>{' '} */}
+    </div>
+  );
+}
 export default App;

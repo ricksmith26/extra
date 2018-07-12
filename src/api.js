@@ -19,6 +19,6 @@ export const fetchTopics = async query => {
 };
 
 export const fetchArticleByTopic = async topic_name => {
-  const res = await axios.get(`${URL}/topics/coding/articles`);
+  const res = await axios.get(`${URL}/topics/${topic_name}/articles`);
   return res.data.topics;
 };
