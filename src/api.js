@@ -18,10 +18,6 @@ export const fetchArticleByTopic = async topic_name => {
   return res;
 };
 
-// export const voteOnArticle = (article_id, direction) => {
-//   await axios.put(`${URL}/articles/${article_id}`)
-// }
-
 export const getUser = async username => {
   const res = await axios.get(`${URL}/users/${username}`);
   return res;
@@ -32,6 +28,7 @@ export const getCommentsForArticle = async article_id => {
   return res.data.comments;
 };
 
-// export const addComment = async article_id => {
-//   const res = await axios.post
-// }
+export const getArticleById = async article_id => {
+  const res = await axios.get(`${URL}/articles/${article_id}`);
+  return res;
+};

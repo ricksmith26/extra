@@ -1,31 +1,53 @@
 import React, { Component } from 'react';
 import * as api from '../../api';
-import { Route } from 'react-router-dom';
-import getCommentsForArticle from '../../api';
-// import Loading from '../loadingScreen';
-
-// function CommentsAdder(props) {
-//   // const com = api.getCommentsForArticle(props.match.params.article_id);
-//   // console.log(com, '<<<<<<<<<<<<<<<<<');
-//   return <div>test</div>;
-// }
+import moment from 'moment';
 
 class CommentsAdder extends Component {
   state = {
+    comments: [],
     article: []
   };
   async componentDidMount() {
-    const article = await api.getCommentsForArticle(
+    const comments = await api.getCommentsForArticle(
       this.props.match.params.article_id
     );
-    console.log(article);
+    const article = await api.getArticleById(
+      this.props.match.params.article_id
+    );
 
-    this.setState({ article });
+    this.setState({ comments, article });
   }
 
   render() {
-    if (!this.state.article.length) return <h1>Loading...</h1>;
-    return <div>{this.state.article[0].body}</div>;
+    console.log(this.state.article.data);
+    if (!this.state.comments.length) return <h1>Loading...</h1>;
+    return (
+      <div>
+        <h2>{this.state.article.data.title}</h2>
+        <h3>{this.state.article.data.body}</h3>
+        <ul>
+          {this.state.comments.map(function(comment) {
+            return (
+              <li>
+                {comment.body}
+                <br />
+                <br />
+                votes:{comment.votes}
+                <br />
+                <br />
+                {moment(comment.created_at).fromNow()}
+                <br />
+                <br />
+              </li>
+            );
+          })}
+        </ul>
+        <input type="text" />
+        <button>submit comment</button>
+        <br />
+        <br />
+      </div>
+    );
   }
 }
 
