@@ -3,22 +3,35 @@ import axios from 'axios';
 
 const URL = 'https://northcodernewsapp.herokuapp.com/api';
 
-export const fetchArticles = async query => {
+export const fetchArticles = async () => {
   const res = await axios.get(`${URL}/articles`);
   return res.data.articles;
 };
 
-export const fetchUsers = async query => {
-  const res = await axios.get(`${URL}/users`);
-  return res.data.users;
-};
-
-export const fetchTopics = async query => {
+export const fetchTopics = async () => {
   const res = await axios.get(`${URL}/topics`);
   return res.data.topics;
 };
 
 export const fetchArticleByTopic = async topic_name => {
   const res = await axios.get(`${URL}/topics/${topic_name}/articles`);
-  return res.data.topics;
+  return res;
 };
+
+// export const voteOnArticle = (article_id, direction) => {
+//   await axios.put(`${URL}/articles/${article_id}`)
+// }
+
+export const getUser = async username => {
+  const res = await axios.get(`${URL}/users/${username}`);
+  return res;
+};
+
+export const getCommentsForArticle = async article_id => {
+  const res = await axios.get(`${URL}/articles/${article_id}/comments`);
+  return res.data.comments;
+};
+
+// export const addComment = async article_id => {
+//   const res = await axios.post
+// }

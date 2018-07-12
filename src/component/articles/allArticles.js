@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function AllArticles({ articles }) {
   return (
@@ -13,9 +14,18 @@ function AllArticles({ articles }) {
               <br />
               {article.body}
               <br />
+              <br />
               {article.created_by}
               <br />
               {article.belongs_to}
+              <br />
+
+              <Link to={`/articles/${article._id}/comments`}>
+                {' '}
+                <button id={article._id}>Comments:{article.comments}</button>
+              </Link>
+              <button>Vote up</button>
+              <button>Vote down</button>
             </li>
           );
         })}

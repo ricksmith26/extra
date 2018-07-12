@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import * as api from './api';
 import Articles from './component/articles/articles';
+// import Loading from './component/loadingScreen';
+
 import { NavLink } from 'react-router-dom';
 
 class App extends Component {
@@ -12,15 +14,16 @@ class App extends Component {
   };
   async componentDidMount() {
     const articles = await api.fetchArticles();
-    const users = await api.fetchUsers();
+
     const topics = await api.fetchTopics();
 
-    this.setState({ articles, users, topics });
+    this.setState({ articles, topics });
   }
 
   render() {
     return (
       <div className="App">
+        {/* <Loading /> */}
         <Nav />
         <header className="App-header">
           <h1 className="App-title">Northcoder News</h1>
@@ -44,12 +47,8 @@ function Nav() {
       </NavLink>
       {` | `}
       <NavLink exact to="/articlesByTopic" activeStyle={activeStyle}>
-        search by topic
+        Search by topic
       </NavLink>
-      {/* {` | `}
-      <NavLink exact to="/addStudent" activeStyle={activeStyle}>
-        Add Student
-      </NavLink>{' '} */}
     </div>
   );
 }
