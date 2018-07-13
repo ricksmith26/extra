@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import * as api from '../../api';
-
 import { Link } from 'react-router-dom';
+import * as api from '../../api';
 
 class fullArticleView extends Component {
   state = {
@@ -18,6 +17,15 @@ class fullArticleView extends Component {
 
     this.setState({ comments, article });
   }
+  async componentDidUpdate(_, prevState) {
+    if (prevState.article !== this.state.article) {
+      const article = await api.getArticleById(
+        this.props.match.params.article_id
+      );
+
+      this.setState({ article });
+    }
+  }
 
   render() {
     if (!this.state.comments.length) return <h1>Loading...</h1>;
@@ -28,10 +36,26 @@ class fullArticleView extends Component {
         <br />
         {this.state.article.data.created_by}
         <br />
+
+        <br />
         <Link to={`/articles/${this.state.article.data._id}/comments`}>
           {' '}
           <p> commments: {this.state.article.data.comments}</p>
         </Link>
+        <button
+          onClick={() =>
+            api.voteArticle(this.state.article.data._id, { vote: 'up' })
+          }
+        >
+          Vote up
+        </button>
+        <button
+          onClick={() =>
+            api.voteArticle(this.state.article.data._id, { vote: 'down' })
+          }
+        >
+          Vote down
+        </button>
       </div>
     );
   }

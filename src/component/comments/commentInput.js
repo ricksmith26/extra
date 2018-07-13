@@ -20,7 +20,6 @@ class MessageInput extends React.Component {
   }
   handleKeyPress = event => {
     if (event.keyCode === 13) {
-      console.log('keyPress');
       this.handlePostMessage('5b3b73b09289af05a338beb2', {
         body: this.state.userInput,
         created_by: 'jessjelly'

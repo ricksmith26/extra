@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import * as api from '../../api';
 import moment from 'moment';
 import MessageInput from './commentInput';
+import { voteComment } from '../../api';
+import deleteC from './delete';
 
 class CommentsAdder extends Component {
   state = {
     comments: [],
-    article: []
+    article: [],
+    user: '5b3b73af9289af05a338beb0'
   };
   async componentDidMount() {
     const comments = await api.getCommentsForArticle(
@@ -42,11 +45,27 @@ class CommentsAdder extends Component {
                 <br />
                 <br />
                 votes:{comment.votes}
+                {'  '}
+                <button
+                  onClick={() => voteComment(comment._id, { vote: 'up' })}
+                >
+                  Vote up
+                </button>
+                <button
+                  onClick={() => voteComment(comment._id, { vote: 'down' })}
+                >
+                  Vote down
+                </button>
                 <br />
                 <br />
                 {moment(comment.created_at).fromNow()}
                 <br />
                 <br />
+                {deleteC(
+                  '5b3b73af9289af05a338beb1',
+                  comment.created_by,
+                  comment._id
+                )}
               </li>
             );
           })}

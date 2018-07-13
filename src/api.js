@@ -43,6 +43,16 @@ export const postComment = async (article_id, comment) => {
 
 export const voteArticle = async (article_id, vote) => {
   const res = await axios.put(`${URL}/articles/${article_id}`, vote);
-  console.log(res.data);
+  return res;
+};
+
+export const voteComment = async (comment_id, vote) => {
+  const res = await axios.put(`${URL}/comments/${comment_id}`, vote);
+  return res;
+};
+
+export const deleteComment = async comment_id => {
+  const res = await axios.delete(`${URL}/comments/${comment_id}`);
+
   return res;
 };
