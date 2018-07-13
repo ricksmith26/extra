@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../../api';
 import moment from 'moment';
+import MessageInput from './commentInput';
 
 class CommentsAdder extends Component {
   state = {
@@ -17,9 +18,17 @@ class CommentsAdder extends Component {
 
     this.setState({ comments, article });
   }
+  async componentDidUpdate(_, prevState) {
+    if (prevState.comments !== this.state.comments) {
+      const comments = await api.getCommentsForArticle(
+        this.props.match.params.article_id
+      );
+
+      this.setState({ comments });
+    }
+  }
 
   render() {
-    console.log(this.state.article.data);
     if (!this.state.comments.length) return <h1>Loading...</h1>;
     return (
       <div>
@@ -42,8 +51,7 @@ class CommentsAdder extends Component {
             );
           })}
         </ul>
-        <input type="text" />
-        <button>submit comment</button>
+        <MessageInput id="messageInput" />
         <br />
         <br />
       </div>
@@ -52,5 +60,3 @@ class CommentsAdder extends Component {
 }
 
 export default CommentsAdder;
-
-// { this.state.article[0].body }

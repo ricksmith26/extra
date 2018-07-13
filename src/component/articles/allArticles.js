@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { voteArticle } from '../../api';
 
 function AllArticles({ articles }) {
   return (
@@ -9,7 +10,9 @@ function AllArticles({ articles }) {
           return (
             <li>
               <br />
-              <b>{article.title}</b>
+              <b>
+                <Link to={`/articles/${article._id}`}> {article.title}</Link>
+              </b>
               <br />
               <br />
               {article.body}
@@ -19,13 +22,19 @@ function AllArticles({ articles }) {
               <br />
               {article.belongs_to}
               <br />
-
               <Link to={`/articles/${article._id}/comments`}>
                 {' '}
                 <button id={article._id}>Comments:{article.comments}</button>
               </Link>
-              <button>Vote up</button>
-              <button>Vote down</button>
+              <button onClick={() => voteArticle(article._id, { vote: 'up' })}>
+                Vote up
+              </button>
+              <button
+                onClick={() => voteArticle(article._id, { vote: 'down' })}
+              >
+                Vote down
+              </button>{' '}
+              Votes: {article.votes}
             </li>
           );
         })}

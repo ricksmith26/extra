@@ -4,6 +4,7 @@ import AllArticles from './allArticles';
 import ArticlesByTopic from './articlesByTopic';
 import CommentsAdder from '../comments/comments';
 import { Route } from 'react-router-dom';
+import fullArticleView from './fullArticleView';
 
 class Articles extends Component {
   state = {
@@ -32,6 +33,11 @@ class Articles extends Component {
           exact
           path="/articles/:article_id/comments"
           component={CommentsAdder}
+        />
+        <Route
+          exact
+          path="/articles/:article_id/"
+          component={fullArticleView}
         />
       </div>
     );

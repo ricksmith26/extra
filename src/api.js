@@ -32,3 +32,17 @@ export const getArticleById = async article_id => {
   const res = await axios.get(`${URL}/articles/${article_id}`);
   return res;
 };
+
+export const postComment = async (article_id, comment) => {
+  const res = await axios.post(
+    `${URL}/articles/${article_id}/comments`,
+    comment
+  );
+  return res;
+};
+
+export const voteArticle = async (article_id, vote) => {
+  const res = await axios.put(`${URL}/articles/${article_id}`, vote);
+  console.log(res.data);
+  return res;
+};
